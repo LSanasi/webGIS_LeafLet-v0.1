@@ -40,6 +40,7 @@
         <script src="js/leaflet-search.js"></script>
         <script src="data/PiezometriSupeProf20230918dynamiclabels_1.js"></script>
         <script src="data/Bozza_Linee_LIL_2.js"></script>
+        <script src="data/Poligono_Lillatro_REV_0.js"></script>
         <script src="js/L.Control.MousePosition.js"></script>
         <script>
         var highlightLayer;
@@ -124,7 +125,8 @@
         map.addLayer(layer_OFC201920cm8bitcanaleRGB_0);
         */
         
-        
+        // Vector Layers 
+
         function pop_PiezometriSupeProf20230918dynamiclabels_1(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -206,7 +208,7 @@
             }
         }
         map.createPane('pane_PiezometriSupeProf20230918dynamiclabels_1');
-        map.getPane('pane_PiezometriSupeProf20230918dynamiclabels_1').style.zIndex = 402;
+        map.getPane('pane_PiezometriSupeProf20230918dynamiclabels_1').style.zIndex = 403;
         map.getPane('pane_PiezometriSupeProf20230918dynamiclabels_1').style['mix-blend-mode'] = 'normal';
         var layer_PiezometriSupeProf20230918dynamiclabels_1 = new L.geoJson(json_PiezometriSupeProf20230918dynamiclabels_1, {
             attribution: '',
@@ -225,6 +227,9 @@
         });
         bounds_group.addLayer(layer_PiezometriSupeProf20230918dynamiclabels_1);
         map.addLayer(layer_PiezometriSupeProf20230918dynamiclabels_1);
+ 
+        
+        // Layer geophy Bozza_Linee_LIL_2
         function pop_Bozza_Linee_LIL_2(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -268,7 +273,7 @@
             }
         }
         map.createPane('pane_Bozza_Linee_LIL_2');
-        map.getPane('pane_Bozza_Linee_LIL_2').style.zIndex = 403;
+        map.getPane('pane_Bozza_Linee_LIL_2').style.zIndex = 404;
         map.getPane('pane_Bozza_Linee_LIL_2').style['mix-blend-mode'] = 'normal';
         var layer_Bozza_Linee_LIL_2 = new L.geoJson(json_Bozza_Linee_LIL_2, {
             attribution: '',
@@ -281,10 +286,45 @@
         });
         bounds_group.addLayer(layer_Bozza_Linee_LIL_2);
         map.addLayer(layer_Bozza_Linee_LIL_2);
-        
+ 
+        // Lillatro perimetro Poligono_Lillatro_REV_0
+        function pop_Poligono_Lillatro_REV_0(feature, layer) {
+        }
+
+        function style_Poligono_Lillatro_REV_0_0() {
+            return {
+                pane: 'pane_Poligono_Lillatro_REV_0',
+                opacity: 1,
+                color: 'rgba(255,200,1,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Poligono_Lillatro_REV_0');
+        map.getPane('pane_Poligono_Lillatro_REV_0').style.zIndex = 402;
+        map.getPane('pane_Poligono_Lillatro_REV_0').style['mix-blend-mode'] = 'normal';
+        var layer_Poligono_Lillatro_REV_0 = new L.geoJson(json_Poligono_Lillatro_REV_0, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Poligono_Lillatro_REV_0',
+            layerName: 'layer_Poligono_Lillatro_REV_0',
+            pane: 'pane_Poligono_Lillatro_REV_0',
+            onEachFeature: pop_Poligono_Lillatro_REV_0,
+            style: style_Poligono_Lillatro_REV_0_0,
+        });
+        bounds_group.addLayer(layer_Poligono_Lillatro_REV_0);
+        map.addLayer(layer_Poligono_Lillatro_REV_0);
+
+
         // Legenda
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/Bozza_Linee_LIL_2.png" /> Linee geofisica': layer_Bozza_Linee_LIL_2,'Piezometri Sup e Prof (2023-09-18) <br /><table><tr><td style="text-align: center;"><img src="legend/PiezometriSupeProf20230918dynamiclabels_1_Profondo0.png" /></td><td>Profondo</td></tr><tr><td style="text-align: center;"><img src="legend/PiezometriSupeProf20230918dynamiclabels_1_Superficiale1.png" /></td><td>Superficiale</td></tr></table>': layer_PiezometriSupeProf20230918dynamiclabels_1,
+        L.control.layers(baseMaps,{'<img src="legend/Bozza_Linee_LIL_2.png" /> Linee geofisica': layer_Bozza_Linee_LIL_2,
+            'Piezometri Sup e Prof (2023-09-18) <br /><table><tr><td style="text-align: center;"><img src="legend/PiezometriSupeProf20230918dynamiclabels_1_Profondo0.png" /></td><td>Profondo</td></tr><tr><td style="text-align: center;"><img src="legend/PiezometriSupeProf20230918dynamiclabels_1_Superficiale1.png" /></td><td>Superficiale</td></tr></table>': layer_PiezometriSupeProf20230918dynamiclabels_1,
+            '<img src="legend/Poligono_Lillatro_REV_0.png" /> Perimetro Lillatro': layer_Poligono_Lillatro_REV_0,
             //"Ortofoto Toscana 2019": layer_OFC201920cm8bitcanaleRGB_0, 
             "Google satellite": googleSat}).addTo(map);
         setBounds();
