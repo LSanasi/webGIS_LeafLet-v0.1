@@ -247,7 +247,7 @@
                         <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-						<th scope="row">Lunghezza (m):</th>\
+						<th scope="row">Lunghezza:</th>\
                         <td colspan="2">' + (feature.properties['Lung_linea'] !== null ? autolinker.link(feature.properties['Lung_linea'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
@@ -307,7 +307,7 @@
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['id'] !== null?String('<div style="color: #323232; font-size: 12pt; color: rgba(255,255,255,1);border-radius:1pt; border-color: rgba(0,0,0,1); font-weight: bold; font-family: \'Calibri\', sans-serif;">' + 'L'+ layer.feature.properties['id']) + '(' +layer.feature.properties['Lung_linea'] + 'm)'+ '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Bozza_Linee_LIL_2'});
+            layer.bindTooltip((layer.feature.properties['id'] !== null?String('<div style="color: #323232; font-size: 12pt; color: rgba(255,255,255,1);border-radius:1pt; border-color: rgba(0,0,0,1); font-weight: bold; font-family: \'Calibri\', sans-serif;">' + 'L'+ layer.feature.properties['id']) + ' (' +layer.feature.properties['Lung_linea'] + ')'+ '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Bozza_Linee_LIL_2'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
