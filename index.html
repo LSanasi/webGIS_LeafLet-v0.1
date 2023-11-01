@@ -92,7 +92,7 @@
         function setBounds() {
         }
         // Mouse coordinates
-        L.control.mousePosition().addTo(map);
+        L.control.mousePosition({separator:' ; ',prefix:'(N;E): '}).addTo(map);
         
         // Backgroud maps
         
