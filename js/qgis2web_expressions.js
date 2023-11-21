@@ -754,17 +754,3 @@ function fnc__specialcol_(values, context) {
 function fnc_project_color(values, context) {
     return false;
 };
-
-
-
-function exp_label_Bozza_Linee_LIL_2_eval_expression(context) {
-    // concat('L', "id", ' (', "Lung_linea", ')')
-
-    var feature = context.feature;
-    
-    if (feature.properties) {
-        return fnc_concat(['L',feature.properties['id'] ,' (',feature.properties['Lung_linea'] ,')'], context);
-    } else {
-        return fnc_concat(['L',feature['id'] ,' (',feature['Lung_linea'] ,')'], context);
-    }
-}

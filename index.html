@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-    <head>
+    <head> 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
@@ -42,7 +42,11 @@
         <script src="data/Bozza_Linee_LIL_2.js"></script>
         <script src="data/Poligono_Lillatro_REV_0.js"></script>
         <script src="js/L.Control.MousePosition.js"></script>
+        <script src="data/Piezometri_0.js"></script>
         <script>
+        
+        // versione aggiornata al 2023-11-21
+        
         var highlightLayer;
         function highlightFeature(e) {
             highlightLayer = e.target;
@@ -94,7 +98,7 @@
         // Mouse coordinates
         L.control.mousePosition({separator:' ; ',prefix:'(N;E): '}).addTo(map);
         
-        // Backgroud maps
+        // ------------------------------------------------   Backgroud maps 
         
         //Google Satellite
         map.createPane('pane_googleSat');
@@ -104,30 +108,14 @@
             subdomains:['mt0','mt1','mt2','mt3']
         });
         map.addLayer(googleSat)
-        
 
 
-        /*map.createPane('pane_OFC201920cm8bitcanaleRGB_0');
-        map.getPane('pane_OFC201920cm8bitcanaleRGB_0').style.zIndex = 400;
-        var layer_OFC201920cm8bitcanaleRGB_0 = L.WMS.layer("http://www502.regione.toscana.it/ows_ofc/com.rt.wms.RTmap/wms?map=owsofc", "rt_ofc.5k19.32bit", {
-            pane: 'pane_OFC201920cm8bitcanaleRGB_0',
-            format: 'image/png',
-            uppercase: true,
-            transparent: true,
-            continuousWorld : true,
-            tiled: true,
-            info_format: 'text/html',
-            opacity: 1,
-            identify: false,
-            attribution: '',
-            maxZoom: 28,
-        });
-        map.addLayer(layer_OFC201920cm8bitcanaleRGB_0);
-        */
-        
-        // Vector Layers 
 
-        function pop_PiezometriSupeProf20230918dynamiclabels_1(feature, layer) {
+
+        // -----------------------------------------------   Vector Layers 
+        // Piezometri sup prof e capisaldi
+
+        function pop_Piezometri_0(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (i in e.target._eventParents) {
@@ -157,11 +145,11 @@
                     </tr>\
                     <tr>\
 						<th scope="row">Z piano camp:</th>\
-                        <td colspan="2">' + (feature.properties['Z_pcamp'] !== null ? autolinker.link(feature.properties['Z_pcamp'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['Z_pc'] !== null ? autolinker.link(feature.properties['Z_pc'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
 						<th scope="row">Z bocca pozzo:</th>\
-                        <td colspan="2">' + (feature.properties['Z_boccap'] !== null ? autolinker.link(feature.properties['Z_boccap'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['Z_bp'] !== null ? autolinker.link(feature.properties['Z_bp'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Aquifero</th>\
@@ -171,11 +159,11 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_PiezometriSupeProf20230918dynamiclabels_1_0(feature) {
+        function style_Piezometri_0_0(feature) {
             switch(String(feature.properties['Aquifero'])) {
                 case 'Profondo':
                     return {
-                pane: 'pane_PiezometriSupeProf20230918dynamiclabels_1',
+                pane: 'pane_Piezometri_0',
                 radius: 4.6,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -191,7 +179,7 @@
                     break;
                 case 'Superficiale':
                     return {
-                pane: 'pane_PiezometriSupeProf20230918dynamiclabels_1',
+                pane: 'pane_Piezometri_0',
                 radius: 4.6,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -205,30 +193,45 @@
                 interactive: true,
             }
                     break;
+                case 'In superficie':
+                    return {
+                pane: 'pane_Piezometri_0',
+                radius: 4.6,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(15,162,248,1.0)',
+                interactive: true,
+            }
+                    break;
             }
         }
-        map.createPane('pane_PiezometriSupeProf20230918dynamiclabels_1');
-        map.getPane('pane_PiezometriSupeProf20230918dynamiclabels_1').style.zIndex = 403;
-        map.getPane('pane_PiezometriSupeProf20230918dynamiclabels_1').style['mix-blend-mode'] = 'normal';
-        var layer_PiezometriSupeProf20230918dynamiclabels_1 = new L.geoJson(json_PiezometriSupeProf20230918dynamiclabels_1, {
+        map.createPane('pane_Piezometri_0');
+        map.getPane('pane_Piezometri_0').style.zIndex = 403;
+        map.getPane('pane_Piezometri_0').style['mix-blend-mode'] = 'normal';
+        var layer_Piezometri_0 = new L.geoJson(json_Piezometri_0, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_PiezometriSupeProf20230918dynamiclabels_1',
-            layerName: 'layer_PiezometriSupeProf20230918dynamiclabels_1',
-            pane: 'pane_PiezometriSupeProf20230918dynamiclabels_1',
-            onEachFeature: pop_PiezometriSupeProf20230918dynamiclabels_1,
+            dataVar: 'json_Piezometri_0',
+            layerName: 'layer_Piezometri_0',
+            pane: 'pane_Piezometri_0',
+            onEachFeature: pop_Piezometri_0,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_PiezometriSupeProf20230918dynamiclabels_1_0(feature));
+                return L.circleMarker(latlng, style_Piezometri_0_0(feature));
             },
         });
-        bounds_group.addLayer(layer_PiezometriSupeProf20230918dynamiclabels_1);
-        map.addLayer(layer_PiezometriSupeProf20230918dynamiclabels_1);
- 
-        
+        bounds_group.addLayer(layer_Piezometri_0);
+        map.addLayer(layer_Piezometri_0);
+
         // Layer geophy Bozza_Linee_LIL_2
         function pop_Bozza_Linee_LIL_2(feature, layer) {
             layer.on({
@@ -320,21 +323,23 @@
         map.addLayer(layer_Poligono_Lillatro_REV_0);
 
 
-        // Legenda
+        // ----------------------------   Legenda  ------------------------
+
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/Bozza_Linee_LIL_2.png" /> Linee geofisica': layer_Bozza_Linee_LIL_2,
-            'Piezometri Sup e Prof (2023-09-18) <br /><table><tr><td style="text-align: center;"><img src="legend/PiezometriSupeProf20230918dynamiclabels_1_Profondo0.png" /></td><td>Profondo</td></tr><tr><td style="text-align: center;"><img src="legend/PiezometriSupeProf20230918dynamiclabels_1_Superficiale1.png" /></td><td>Superficiale</td></tr></table>': layer_PiezometriSupeProf20230918dynamiclabels_1,
-            '<img src="legend/Poligono_Lillatro_REV_0.png" /> Perimetro Lillatro': layer_Poligono_Lillatro_REV_0,
-            //"Ortofoto Toscana 2019": layer_OFC201920cm8bitcanaleRGB_0, 
-            "Google satellite": googleSat}).addTo(map);
+        L.control.layers(baseMaps,{'Piezometri<br /><table><tr><td style="text-align: center;"><img src="legend/Piezometri_0_Profondo0.png" /></td><td>Profondo</td></tr><tr><td style="text-align: center;"><img src="legend/Piezometri_0_Superficiale1.png" /></td><td>Superficiale</td></tr><tr><td style="text-align: center;"><img src="legend/Piezometri_0_Insuperficie2.png" /></td><td>In superficie</td></tr></table>': layer_Piezometri_0,
+        '<img src="legend/Bozza_Linee_LIL_2.png" /> Linee geofisica': layer_Bozza_Linee_LIL_2,
+        '<img src="legend/Poligono_Lillatro_REV_0.png" /> Perimetro Lillatro': layer_Poligono_Lillatro_REV_0,
+        //"Ortofoto Toscana 2019": layer_OFC201920cm8bitcanaleRGB_0, 
+        "Google satellite": googleSat
+        }).addTo(map);
         setBounds();
         var i = 0;
-        layer_PiezometriSupeProf20230918dynamiclabels_1.eachLayer(function(layer) {
+        layer_Piezometri_0.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['TAG_PUNTI'] !== null?String('<div style="color: #323232; font-size: 8pt; background-color: rgba(255, 255, 255, 0.6); font-weight: bold; font-family: \'Calibri\', sans-serif;">' + layer.feature.properties['TAG_PUNTI']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_PiezometriSupeProf20230918dynamiclabels_1'});
+            layer.bindTooltip((layer.feature.properties['TAG_PUNTI'] !== null?String('<div style="color: #323232; font-size: 8pt; background-color: rgba(255, 255, 255, 0.6); font-weight: bold; font-family: \'Calibri\', sans-serif;">' + layer.feature.properties['TAG_PUNTI']) + '</div>':''), {permanent: true, offset: [-0, -16], className:  'css_Piezometri_0'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
@@ -354,22 +359,27 @@
               addLabel(layer, i);
               i++;
         });
+
+
+        // Search bar
         map.addControl(new L.Control.Search({
-            layer: layer_PiezometriSupeProf20230918dynamiclabels_1,
+            layer: layer_Piezometri_0,
             initial: false,
             hideMarkerOnCollapse: true,
             propertyName: 'TAG_PUNTI'}));
         document.getElementsByClassName('search-button')[0].className +=
          ' fa fa-binoculars';
-        resetLabels([layer_PiezometriSupeProf20230918dynamiclabels_1,layer_Bozza_Linee_LIL_2]);
+
+
+        resetLabels([layer_Piezometri_0]);
         map.on("zoomend", function(){
-            resetLabels([layer_PiezometriSupeProf20230918dynamiclabels_1,layer_Bozza_Linee_LIL_2]);
+            resetLabels([layer_Piezometri_0]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_PiezometriSupeProf20230918dynamiclabels_1,layer_Bozza_Linee_LIL_2]);
+            resetLabels([layer_Piezometri_0]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_PiezometriSupeProf20230918dynamiclabels_1,layer_Bozza_Linee_LIL_2]);
+            resetLabels([layer_Piezometri_0]);
         });
         </script>
     </body>
